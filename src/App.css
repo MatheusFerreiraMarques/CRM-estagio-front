@@ -1,0 +1,174 @@
+/* Estilo para a área de pesquisa e filtro */
+.search-filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Alinha os itens ao longo da linha */
+  margin-bottom: 20px; /* Espaço abaixo */
+}
+
+/* Campo de pesquisa */
+.search-input {
+  flex-grow: 1; /* Faz o campo de pesquisa ocupar o máximo de espaço disponível */
+  margin-left: 10px; /* Espaçamento à esquerda */
+}
+
+/* Estilização do filtro */
+.filter-select {
+  width: 200px; /* Definindo uma largura específica para o filtro */
+  margin-right: 10px; /* Espaçamento à direita */
+}
+
+
+/* Container principal do formulário de login */
+.card-container.card {
+  max-width: 320px;
+  padding: 30px 20px; /* Reduzido um pouco */
+  margin: auto;
+  margin-top: 80px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Título de seção */
+.section-title {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 15px; /* Menor espaço abaixo do título */
+}
+
+/* Campo de entrada */
+.form-control {
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px; /* Reduzido para menos espaço entre campos */
+  transition: border-color 0.2s;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: none;
+}
+
+/* Botão de login */
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  transition: background-color 0.3s;
+  margin-top: 15px; /* Espaço ajustado acima do botão */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Link de senha esquecida */
+.forgot-password {
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Texto de registro */
+.text-center p {
+  font-size: 14px;
+  color: #666;
+  margin-top: 10px;
+}
+
+/* Feedback de erro */
+.invalid-feedback {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: -10px;
+}
+
+/* Mensagem de erro */
+.alert-danger {
+  background-color: #ffcccc;
+  color: #e74c3c;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+.table {
+  border-collapse: collapse; /* Remove espaços entre as células */
+}
+
+.table th, .table td {
+  border: 1px solid #dee2e6; /* Adiciona bordas entre as colunas */
+}
+
+/* Cor para as linhas pares */
+.table-hover tbody tr:nth-child(even) {
+  background-color: #f8f9fa; /* Cinza claro */
+}
+
+/* Cor para as linhas ímpares */
+.table-hover tbody tr:nth-child(odd) {
+  background-color: white;
+}
+
+/* Remove o efeito de hover */
+.table-hover tbody tr:hover {
+  background-color: unset !important;
+}
+
+.table th {
+  background-color: #343a40; /* Cor de fundo do cabeçalho */
+  color: #fff; /* Cor do texto do cabeçalho */
+}
+
+.edit-form {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #fff; /* Fundo branco para o formulário */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Espaçamento abaixo do formulário */
+}
+
+.button-group {
+  margin-top: 15px; /* Aumenta o espaço entre os botões */
+}
+
+.btn-outline-primary,
+.btn-outline-danger {
+  margin-right: 10px; /* Aumenta o espaço entre os botões */
+}
+
+/* Custom text color for "Nenhum" status */
+.text-danger {
+  font-weight: 600;
+}
+
+.text-success {
+  font-weight: 600;
+}
+
+.select-desempregado {
+  color: red; /* Vermelho para Desempregado */
+}
+
+.select-todos {
+  color: green; /* Verde para Todos */
+}

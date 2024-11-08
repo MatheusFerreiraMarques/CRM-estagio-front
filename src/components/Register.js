@@ -25,7 +25,7 @@ const validEmail = (value) => {
   }
 };
 
-const vusername = (value) => {
+const vname = (value) => {
   if (value.length < 3 || value.length > 30) {
     return (
       <div className="invalid-feedback d-block">
@@ -63,16 +63,16 @@ const Register = (props) => {
   const form = useRef();
   const checkBtn = useRef();
 
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState(""); // Novo estado para confirmar a senha
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
-  const onChangeUsername = (e) => {
-    const username = e.target.value;
-    setUsername(username);
+  const onChangeName = (e) => {
+    const name = e.target.value;
+    setName(name);
   };
 
   const onChangeEmail = (e) => {
@@ -99,7 +99,7 @@ const Register = (props) => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.register(username, email, password).then(
+      AuthService.register(name, email, password).then(
         (response) => {
           setMessage(response.data.message);
           setSuccessful(true);
@@ -131,10 +131,10 @@ const Register = (props) => {
                   type="text"
                   className="form-control"
                   placeholder="Nome"
-                  name="username"
-                  value={username}
-                  onChange={onChangeUsername}
-                  validations={[required, vusername]}
+                  name="name"
+                  value={name}
+                  onChange={onChangeName}
+                  validations={[required, vname]}
                 />
               </div>
 

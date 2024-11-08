@@ -1,23 +1,23 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/api/auth/";
+const API_URL = "http://localhost:3333/";
 
-const register = (username, email, password) => {
-  return axios.post(API_URL + "signup", {
-    username,
+const register = (name, email, password) => {
+  return axios.post(API_URL + "register-user", {
+    name,
     email,
     password,
   });
 };
 
-const login = (username, password) => {
+const login = (email, password) => {
   return axios
     .post(API_URL + "signin", {
-      username,
+      email,
       password,
     })
     .then((response) => {
-      if (response.data.username) {
+      if (response.data.email) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
 

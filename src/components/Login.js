@@ -37,37 +37,34 @@ const Login = () => {
     setPassword(password);
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+const handleLogin = (e) => {
+  e.preventDefault();
+  setMessage("");
+  setLoading(true);
 
-    setMessage("");
-    setLoading(true);
+  form.current.validateAll();
 
-    form.current.validateAll();
+  if (checkBtn.current.context._errors.length === 0) {
+    AuthService.login(name, password).then(
+      () => {
+        navigate("/alunos"); // Navegação sem recarregar a página
+      },
+      (error) => {
+        const resMessage =
+          (error.response && error.response.data && error.response.data.message) ||
+          error.message ||
+          error.toString();
 
-    if (checkBtn.current.context._errors.length === 0) {
-      AuthService.login(name, password).then(
-        () => {
-          navigate("/profile");
-          window.location.reload();
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+        setLoading(false);
+        setMessage(resMessage);
+      }
+    );
+  } else {
+    setLoading(false);
+  }
+};
 
-          setLoading(false);
-          setMessage(resMessage);
-        }
-      );
-    } else {
-      setLoading(false);
-    }
-  };
-
+  
   return (
       
 <div className="col-md-12">

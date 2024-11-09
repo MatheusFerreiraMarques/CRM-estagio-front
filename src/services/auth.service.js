@@ -10,29 +10,38 @@ const register = (name, email, password) => {
   });
 };
 
-const login = (email, password) => {
-  return axios
-    .post(API_URL + "signin", {
-      email,
-      password,
-    })
-    .then((response) => {
-      if (response.data.email) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-      }
+const login = async (email, password) => {
+  try {
+    const response = await axios.post(API_URL + "signin", { email, password });
 
-      return response.data;
-    });
+    if (response.data.token) {
+      // Salva o token e os dados do usuário no localStorage
+      localStorage.setItem("user", JSON.stringify(response.data));
+      console.log("Usuário logado:", response.data);
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error("Erro ao tentar login:", error);
+    throw error;
+  }
 };
 
-const logout = () => {
+const logout = async () => {
+  // Remove o token e os dados do usuário do localStorage
   localStorage.removeItem("user");
-  return axios.post(API_URL + "signout").then((response) => {
+
+  try {
+    const response = await axios.post(API_URL + "signout");
     return response.data;
-  });
+  } catch (error) {
+    console.error("Erro ao tentar logout:", error);
+    throw error;
+  }
 };
 
 const getCurrentUser = () => {
+  // Retorna o objeto do usuário com o token do localStorage ou null
   return JSON.parse(localStorage.getItem("user"));
 };
 
@@ -41,6 +50,6 @@ const AuthService = {
   login,
   logout,
   getCurrentUser,
-}
+};
 
 export default AuthService;

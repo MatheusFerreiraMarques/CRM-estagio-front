@@ -1,12 +1,12 @@
-// Importação do componente Tabelas
-import Tabelas from "./components/Alunos";
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
+// Importação do AuthService para controle de autenticação
 import AuthService from "./services/auth.service";
 
+// Importação dos componentes das páginas
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
@@ -14,33 +14,25 @@ import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
-
-// import AuthVerify from "./common/AuthVerify";
-import EventBus from "./common/EventBus";
+import Tabelas from "./components/Alunos"; // Componente da Tabela de Alunos
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
 
+  // useEffect para buscar usuário e gerenciar autenticação
   useEffect(() => {
     const user = AuthService.getCurrentUser();
-
+    
     if (user) {
       setCurrentUser(user);
       setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
       setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
-
-    EventBus.on("logout", () => {
-      logOut();
-    });
-
-    return () => {
-      EventBus.remove("logout");
-    };
   }, []);
-
+  
+  // Função de logout
   const logOut = () => {
     AuthService.logout();
     setShowModeratorBoard(false);
@@ -51,21 +43,18 @@ const App = () => {
   return (
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
-      <Link to="/" className="navbar-brand">
-  <img src="fpm.png" alt="FPM Logo" style={{ height: '40px' }} /> {/* Ajuste o estilo conforme necessário */}
-</Link>
+        <Link to="/" className="navbar-brand">
+          <img src="fpm.png" alt="FPM Logo" style={{ height: '40px' }} />
+        </Link>
 
         <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/home"} className="nav-link">
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to={"/alunos"} className="nav-link">
-              Tabela
-            </Link>
-          </li>
+          {currentUser && (
+            <li className="nav-item">
+              <Link to={"/alunos"} className="nav-link">
+                Alunos
+              </Link>
+            </li>
+          )}
 
           {showModeratorBoard && (
             <li className="nav-item">
@@ -106,6 +95,7 @@ const App = () => {
             </li>
           </div>
         ) : (
+          // Só exibe o botão de login se não houver currentUser
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
               <Link to={"/login"} className="nav-link">
@@ -126,11 +116,9 @@ const App = () => {
           <Route path="/user" element={<BoardUser />} />
           <Route path="/mod" element={<BoardModerator />} />
           <Route path="/admin" element={<BoardAdmin />} />
-          <Route path="/alunos" element={<Tabelas />} /> {/* Nova rota para Tabelas */}
+          <Route path="/alunos" element={<Tabelas />} /> {/* Rota para Tabela */}
         </Routes>
       </div>
-
-      {/* <AuthVerify logOut={logOut}/> */}
     </div>
   );
 };

@@ -20,16 +20,16 @@ const Login = () => {
   const form = useRef();
   const checkBtn = useRef();
 
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
-  const onChangeUsername = (e) => {
-    const username = e.target.value;
-    setUsername(username);
+  const onChangeName = (e) => {
+    const name = e.target.value;
+    setName(name);
   };
 
   const onChangePassword = (e) => {
@@ -46,7 +46,7 @@ const Login = () => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.login(username, password).then(
+      AuthService.login(name, password).then(
         () => {
           navigate("/profile");
           window.location.reload();
@@ -79,9 +79,9 @@ const Login = () => {
       type="text"
       className="form-control"
       placeholder="E-mail"
-      name="username"
-      value={username}
-      onChange={onChangeUsername}
+      name="name"
+      value={name}
+      onChange={onChangeName}
       validations={[required]}
     />
   </div>

@@ -47,7 +47,7 @@ const handleLogin = (e) => {
   if (checkBtn.current.context._errors.length === 0) {
     AuthService.login(name, password).then(
       () => {
-        navigate("/alunos"); // Navegação sem recarregar a página
+        navigate("/home"); // Navegação sem recarregar a página
       },
       (error) => {
         const resMessage =

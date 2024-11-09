@@ -1,0 +1,163 @@
+/* Fonte do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Aplicando a fonte Poppins */
+.home-container {
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+/* Estilo para a imagem no topo */
+.image-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+.image-header img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 40vh;
+  object-fit: cover;
+  object-position: center;
+  border-bottom: 4px solid #007bff;
+}
+
+/* Estilo para o título hero */
+.hero-section {
+  text-align: center;
+  padding: 30px 40px;
+  background-color: #f0f8ff;
+  margin-bottom: 50px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+.hero-section h1 {
+  font-size: 3em;
+  margin-bottom: 15px;
+  color: #007bff;
+  font-weight: 600;
+}
+
+.hero-section p {
+  font-size: 1.25em;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Seção de benefícios */
+.benefits-section {
+  padding: 40px 20px;
+  background-color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+.benefits-section h2 {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 40px;
+  color: #007bff;
+  font-weight: 600;
+}
+
+.benefits-grid {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.benefit-item {
+  background-color: #f1f1f1;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.benefit-item h3 {
+  font-size: 1.6em;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.benefit-item p {
+  font-size: 1.1em;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Estilo para o footer */
+.footer {
+  text-align: center;
+  padding: 30px;
+  background-color: #f0f8ff;
+  color: #555;
+  margin-top: 40px;
+  font-weight: 500;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Estilo para a área de pesquisa e filtro */
+.search-filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Alinha os itens ao longo da linha */
+  margin-bottom: 20px; /* Espaço abaixo */
+}
+
+/* Campo de pesquisa */
+.search-input {
+  flex-grow: 1; /* Faz o campo de pesquisa ocupar o máximo de espaço disponível */
+  margin-left: 10px; /* Espaçamento à esquerda */
+}
+
+/* Estilização do filtro */
+.filter-select {
+  width: 200px; /* Definindo uma largura específica para o filtro */
+  margin-right: 10px; /* Espaçamento à direita */
+}
+
+
+/* Container principal do formulário de login */
+.card-container.card {
+  max-width: 320px;
+  padding: 30px 20px; /* Reduzido um pouco */
+  margin: auto;
+  margin-top: 80px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Título de seção */
+.section-title {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 15px; /* Menor espaço abaixo do título */
+}
+
+/* Campo de entrada */
+.form-control {
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px; /* Reduzido para menos espaço entre campos */
+  transition: border-color 0.2s;
+}

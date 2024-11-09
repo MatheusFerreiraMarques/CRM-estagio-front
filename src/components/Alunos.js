@@ -1,190 +1,157 @@
-import React, { useState } from 'react';
-import '../App.css';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie'; // Importando js-cookie
 
-const Tabelas = () => {
-  const [clientes, setClientes] = useState([
-    { id: 1, nome: 'Matheus', numero: '40028922', empresa: 'chatPro', trabalhando: 'Estágio' },
-    { id: 2, nome: 'Jhonata', numero: '40028922', empresa: 'chatPro', trabalhando: 'CLT' },
-    { id: 3, nome: 'Pablo', numero: '40028922', empresa: 'Empresa A', trabalhando: 'Estágio FPM' },
-    { id: 4, nome: 'Fulano', numero: '40028922', empresa: 'Empresa B', trabalhando: 'PJ' },
-    { id: 5, nome: 'Ciclano', numero: '40028922', empresa: '', trabalhando: 'Nenhum' },
-  ]);
-
-  const [editandoCliente, setEditandoCliente] = useState(null);
-  const [formData, setFormData] = useState({ nome: '', numero: '', empresa: '', trabalhando: '' });
-  const [filtroTrabalho, setFiltroTrabalho] = useState('');
-  const [pesquisaNome, setPesquisaNome] = useState('');
+const Alunos = () => {
+  const navigate = useNavigate();
+  const [clientesFiltrados, setClientesFiltrados] = useState([]);
+  const [pesquisaNome, setPesquisaNome] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    nome: "",
+    numero: "",
+    empresa: "",
+    trabalhando: "Nenhum",
+    registration: "",
+  });
   const [isEmpresaDisabled, setIsEmpresaDisabled] = useState(false);
 
-  const getTrabalhoClass = (status) => {
-    return status === 'Nenhum' ? 'text-danger' : 'text-success';
-  };
-
-  const handleEdit = (cliente) => {
-    setEditandoCliente(cliente.id);
-    setFormData(cliente);
-    setIsEmpresaDisabled(cliente.trabalhando === 'Nenhum');
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-  
-    // Se o campo 'trabalhando' é alterado para 'Nenhum', limpa o campo 'empresa'
-    if (name === 'trabalhando' && value === 'Nenhum') {
-      setFormData(prev => ({ ...prev, [name]: value, empresa: '' }));
-      setIsEmpresaDisabled(true);
-    } else {
-      setFormData(prev => ({ ...prev, [name]: value }));
-      setIsEmpresaDisabled(value === 'Nenhum');
+  // Verificação de login ao carregar o componente
+  useEffect(() => {
+    const token = Cookies.get("authToken"); // Agora buscando o token nos cookies
+    if (!token) {
+      navigate("/login"); // Redireciona para a página de login caso não tenha o token
     }
-  };  
-
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  setFormData(prev => ({ ...prev, [name]: value }));
-
-  // Limpa o campo "empresa" se o cliente não estiver trabalhando
-  if (name === 'trabalhando' && value === 'Não') {
-    setFormData(prev => ({ ...prev, empresa: '' }));
-  }
-};
-
-
-  const handleSave = () => {
-    const updatedClientes = clientes.map(cliente =>
-      cliente.id === editandoCliente ? { ...cliente, ...formData } : cliente
-    );
-    setClientes(updatedClientes);
-    setEditandoCliente(null);
+  }, [navigate]);
+  
+  // Funções de manipulação de estado e de modal
+  const handlePesquisaChange = (event) => {
+    setPesquisaNome(event.target.value);
   };
 
-  const handleCancel = () => {
-    setEditandoCliente(null);
+  const handleModalInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handleFiltroChange = (e) => {
-    setFiltroTrabalho(e.target.value);
+  const handleModalClose = () => {
+    setIsModalOpen(false);
   };
 
-  const handlePesquisaChange = (e) => {
-    setPesquisaNome(e.target.value);
+  const handleModalSave = () => {
+    // Lógica para salvar os dados
+    setIsModalOpen(false);
   };
 
-  const clientesFiltrados = clientes.filter(cliente => {
-    const nomeMatch = cliente.nome.toLowerCase().includes(pesquisaNome.toLowerCase());
-    const trabalhoMatch = filtroTrabalho ? cliente.trabalhando === filtroTrabalho : true;
-    return nomeMatch && trabalhoMatch;
-  });
+  const handleAddStudent = () => {
+    setIsModalOpen(true);
+  };
+
+  // Aqui você pode implementar a função handleEdit, que estava faltando no seu código
+  const handleEdit = (cliente) => {
+    // Lógica para editar o aluno, por exemplo, abrir o modal com os dados do aluno
+    setFormData({
+      nome: cliente.nome,
+      numero: cliente.numero,
+      empresa: cliente.empresa,
+      trabalhando: cliente.trabalhando,
+      registration: cliente.registration,
+    });
+    setIsModalOpen(true);
+  };
 
   return (
-    <div className="table-responsive my-4">
-      {!editandoCliente && (
-        <div className="mb-3">
-          <div className="d-flex align-items-center">
+    <div className="container">
+      <div className="d-flex justify-content-between">
+        <input
+          type="text"
+          value={pesquisaNome}
+          onChange={handlePesquisaChange}
+          className="form-control"
+          placeholder="Buscar aluno pelo nome..."
+        />
+        <button className="btn btn-primary my-2" onClick={handleAddStudent}>Adicionar Estudante</button>
+      </div>
 
-          <select value={filtroTrabalho} onChange={handleFiltroChange} className="form-control d-inline w-auto me-2">
-            <option value="" className="select-todos">Todos</option>
-            <option value="Nenhum" className="select-desempregado">Desempregado</option>
-            <option value="CLT">CLT</option>
-            <option value="PJ">PJ</option>
-            <option value="Estágio">Estágio</option>
-            <option value="Estágio FPM">Estágio FPM</option>
-          </select>
-
-            <input 
-              type="text" 
-              placeholder="Pesquisar por nome" 
-              value={pesquisaNome} 
-              onChange={handlePesquisaChange} 
-              className="form-control" 
-            />
-          </div>
-        </div>
-      )}
-
-      {editandoCliente ? (
-        <div className="edit-form">
-          <h4>Editar Cliente</h4>
-          <div className="mb-3">
-            <label>Nome:</label>
-            <input
-              type="text"
-              name="nome"
-              value={formData.nome}
-              onChange={handleInputChange}
-              className="form-control"
-            />
-          </div>
-          <div className="mb-3">
-            <label>Número:</label>
-            <input
-              type="text"
-              name="numero"
-              value={formData.numero}
-              onChange={handleInputChange}
-              className="form-control"
-            />
-          </div>
-          <div className="mb-3">
-            <label>Empresa:</label>
-            <input
-              type="text"
-              name="empresa"
-              value={formData.empresa}
-              onChange={handleInputChange}
-              className="form-control"
-              disabled={isEmpresaDisabled}
-            />
-          </div>
-          <div className="mb-3">
-            <label>Trabalhando:</label>
-            <select
-              name="trabalhando"
-              value={formData.trabalhando}
-              onChange={handleInputChange}
-              className="form-control"
-            >
-              <option value="CLT">CLT</option>
-              <option value="PJ">PJ</option>
-              <option value="Estágio">Estágio</option>
-              <option value="Estágio FPM">Estágio FPM</option>
-              <option value="Nenhum">Nenhum</option>
-            </select>
-          </div>
-          <div className="button-group">
-            <button className="btn btn-outline-primary me-2" onClick={handleSave}>Salvar</button>
-            <button className="btn btn-outline-secondary" onClick={handleCancel}>Voltar</button>
-          </div>
-        </div>
-      ) : (
-        <table className="table table-hover table-striped align-middle shadow-sm">
-          <thead className="table-dark">
-            <tr>
-              <th scope="col">Nome</th>
-              <th scope="col">Número</th>
-              <th scope="col">Empresa</th>
-              <th scope="col">Trabalhando</th>
-              <th scope="col">Ações</th>
+      <table className="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Trabalhando</th>
+            <th>Empresa</th>
+            <th>Registro</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {clientesFiltrados.map(cliente => (
+            <tr key={cliente.id}>
+              <td>{cliente.id}</td>
+              <td>{cliente.nome}</td>
+              <td>{cliente.trabalhando}</td>
+              <td>{cliente.empresa || 'N/A'}</td>
+              <td>{cliente.registration}</td>
+              <td>
+                <button onClick={() => handleEdit(cliente)} className="btn btn-sm btn-primary">Editar</button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {clientesFiltrados.map((cliente) => (
-              <tr key={cliente.id}>
-                <td>{cliente.nome}</td>
-                <td>{cliente.numero}</td>
-                <td>{cliente.empresa}</td>
-                <td className={getTrabalhoClass(cliente.trabalhando)}>{cliente.trabalhando}</td>
-                <td>
-                  <button className="btn btn-outline-primary btn-sm me-2" onClick={() => handleEdit(cliente)}>Editar</button>
-                  <button className="btn btn-outline-danger btn-sm">Excluir</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Modal para adicionar aluno */}
+      {isModalOpen && (
+        <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1" role="dialog">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Adicionar Novo Estudante</h5>
+                <button type="button" className="btn-close" onClick={handleModalClose}></button>
+              </div>
+              <div className="modal-body">
+                <form>
+                  <div className="mb-3">
+                    <label htmlFor="nome" className="form-label">Nome</label>
+                    <input type="text" id="nome" name="nome" className="form-control" value={formData.nome} onChange={handleModalInputChange} />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="numero" className="form-label">Número</label>
+                    <input type="text" id="numero" name="numero" className="form-control" value={formData.numero} onChange={handleModalInputChange} />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="empresa" className="form-label">Empresa</label>
+                    <input type="text" id="empresa" name="empresa" className="form-control" value={formData.empresa} onChange={handleModalInputChange} disabled={isEmpresaDisabled} />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="trabalhando" className="form-label">Trabalhando</label>
+                    <select id="trabalhando" name="trabalhando" className="form-control" value={formData.trabalhando} onChange={handleModalInputChange}>
+                      <option value="Nenhum">Nenhum</option>
+                      <option value="CLT">CLT</option>
+                      <option value="PJ">PJ</option>
+                      <option value="Estágio">Estágio</option>
+                      <option value="Estágio FPM">Estágio FPM</option>
+                    </select>
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="registration" className="form-label">Registro</label>
+                    <input type="text" id="registration" name="registration" className="form-control" value={formData.registration} onChange={handleModalInputChange} />
+                  </div>
+                </form>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={handleModalClose}>Fechar</button>
+                <button type="button" className="btn btn-primary" onClick={handleModalSave}>Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
 };
 
-export default Tabelas;
+export default Alunos;

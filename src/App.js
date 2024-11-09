@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 
 // Importação do AuthService para controle de autenticação
 import AuthService from "./services/auth.service";
@@ -14,7 +13,10 @@ import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
-import Tabelas from "./components/Alunos"; // Componente da Tabela de Alunos
+import Alunos from "./components/Alunos"; // Componente da Tabela de Alunos
+
+// Importando js-cookie para acessar os cookies
+import Cookies from "js-cookie";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -23,12 +25,12 @@ const App = () => {
 
   // useEffect para buscar usuário e gerenciar autenticação
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    
-    if (user) {
-      setCurrentUser(user);
-      setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+    const token = Cookies.get("token");  // Pegando diretamente do js-cookie
+    if (token) {
+      setCurrentUser({ username: 'User', token: token });  // Defina o usuário como quiser
+      // Simulando roles (substitua com o que é retornado pela sua API se aplicável)
+      setShowModeratorBoard(true); // Ou lógica para determinar o papel
+      setShowAdminBoard(true);     // Ou lógica para determinar o papel
     }
   }, []);
   
@@ -48,6 +50,7 @@ const App = () => {
         </Link>
 
         <div className="navbar-nav mr-auto">
+          {/* Exibe o item "Alunos" apenas se o token estiver presente */}
           {currentUser && (
             <li className="nav-item">
               <Link to={"/alunos"} className="nav-link">
@@ -116,7 +119,7 @@ const App = () => {
           <Route path="/user" element={<BoardUser />} />
           <Route path="/mod" element={<BoardModerator />} />
           <Route path="/admin" element={<BoardAdmin />} />
-          <Route path="/alunos" element={<Tabelas />} /> {/* Rota para Tabela */}
+          <Route path="/alunos" element={<Alunos />} /> {/* Rota para Tabela */}
         </Routes>
       </div>
     </div>

@@ -51,7 +51,7 @@ const Login = () => {
           localStorage.setItem("message", "authenticated");
 
           // Navega para /alunos e recarrega a página
-          navigate("/alunos");
+          navigate("/students");
           window.location.reload();
         },
         (error) => {

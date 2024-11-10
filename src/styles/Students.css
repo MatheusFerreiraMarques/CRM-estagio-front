@@ -124,33 +124,6 @@
   align-items: center; /* Garante que a barra de pesquisa e o ícone estejam alinhados verticalmente */
 }
 
-/* Ícone de Fechar (X) */
-.btn-close {
-  background: none;
-  border: none;
-  font-size: 1.5rem; /* Tamanho do ícone */
-  color: #fff; /* Cor do ícone (branco) */
-  opacity: 0.7;
-  transition: opacity 0.2s ease; /* Transição de opacidade */
-}
-
-.btn-close:hover {
-  opacity: 1;
-  cursor: pointer; /* Cursor de pointer ao passar o mouse */
-}
-
-/* Caso deseje arredondar o ícone */
-.btn-close {
-  border-radius: 50%; /* Bordas arredondadas */
-  padding: 5px;
-  background-color: rgba(0, 0, 0, 0.1); /* Fundo com transparência */
-}
-
-.btn-close:hover {
-  background-color: rgba(0, 0, 0, 0.2); /* Fundo mais escuro ao passar o mouse */
-}
-
-
 .plus-icon {
   display: flex; /* Torna o botão um flex container */
   justify-content: center; /* Alinha o ícone horizontalmente no centro */
@@ -174,6 +147,29 @@
   transform: scale(1.1);
 }
 
+.refresh-icon {
+  display: flex; /* Torna o botão um flex container */
+  justify-content: center; /* Alinha o ícone horizontalmente no centro */
+  align-items: center; /* Alinha o ícone verticalmente no centro */
+  width: 40px;
+  height: 40px;
+  background-color: #28a745;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  position: relative;
+  top: -5px; /* Ajuste para mover o botão um pouco para cima */
+}
+
+.refresh-icon:hover {
+  background-color: #218838; /* Cor mais escura ao passar o mouse */
+  transform: scale(1.1);
+}
+
 input.form-control {
   width: 100%; /* Garante que o campo de pesquisa ocupe a maior parte da largura disponível */
 }
@@ -188,3 +184,6 @@ input.form-control {
   width: 100%; /* A largura da barra de pesquisa irá preencher o contêiner, até o tamanho do ícone */
   padding-right: 40px; /* Espaço para o ícone à direita */
 }
+
+
+

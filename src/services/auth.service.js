@@ -32,6 +32,11 @@ const login = (email, password) => {
 
 const logout = async () => {
   localStorage.removeItem("message");
+  localStorage.removeItem("students");
+
+  // Remover o token do cookie, assumindo que o token esteja em um cookie chamado 'authToken'
+  Cookies.remove("token");  // Substitua 'authToken' pelo nome correto do seu cookie, se for diferente.
+
   try {
     const response = await axios.post(API_URL + "signout", {}, { withCredentials: true });
     return response.data;

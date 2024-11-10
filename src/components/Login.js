@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom"; // Adicione Link para navegação
+import { useNavigate, Link } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -37,87 +37,90 @@ const Login = () => {
     setPassword(password);
   };
 
-const handleLogin = (e) => {
-  e.preventDefault();
-  setMessage("");
-  setLoading(true);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setMessage("");
+    setLoading(true);
 
-  form.current.validateAll();
+    form.current.validateAll();
 
-  if (checkBtn.current.context._errors.length === 0) {
-    AuthService.login(name, password).then(
-      () => {
-        navigate("/home"); // Navegação sem recarregar a página
-      },
-      (error) => {
-        const resMessage =
-          (error.response && error.response.data && error.response.data.message) ||
-          error.message ||
-          error.toString();
+    if (checkBtn.current.context._errors.length === 0) {
+      AuthService.login(name, password).then(
+        (response) => {
+          // Armazena a mensagem de autenticação no localStorage
+          localStorage.setItem("message", "authenticated");
 
-        setLoading(false);
-        setMessage(resMessage);
-      }
-    );
-  } else {
-    setLoading(false);
-  }
-};
+          // Navega para /alunos e recarrega a página
+          navigate("/alunos");
+          window.location.reload();
+        },
+        (error) => {
+          const resMessage =
+            (error.response && error.response.data && error.response.data.message) ||
+            error.message ||
+            error.toString();
 
-  
+          setLoading(false);
+          setMessage(resMessage);
+        }
+      );
+    } else {
+      setLoading(false);
+    }
+  };
+
   return (
-      
-<div className="col-md-12">
-  <div className="card card-container">
-  <h2 className="section-title">Login</h2>
-<Form onSubmit={handleLogin} ref={form}>
-  <div className="form-group">
-    <Input
-      type="text"
-      className="form-control"
-      placeholder="E-mail"
-      name="name"
-      value={name}
-      onChange={onChangeName}
-      validations={[required]}
-    />
-  </div>
+    <div className="col-md-12">
+      <div className="card card-container">
+        <h2 className="section-title">Login</h2>
+        <Form onSubmit={handleLogin} ref={form}>
+          <div className="form-group">
+            <Input
+              type="text"
+              className="form-control"
+              placeholder="E-mail"
+              name="name"
+              value={name}
+              onChange={onChangeName}
+              validations={[required]}
+            />
+          </div>
 
-  <div className="form-group">
-    <Input
-      type="password"
-      className="form-control"
-      placeholder="Senha"
-      name="password"
-      value={password}
-      onChange={onChangePassword}
-      validations={[required]}
-    />
-  </div>
+          <div className="form-group">
+            <Input
+              type="password"
+              className="form-control"
+              placeholder="Senha"
+              name="password"
+              value={password}
+              onChange={onChangePassword}
+              validations={[required]}
+            />
+          </div>
 
-  <div className="form-group text-right">
-    <Link to="#" className="forgot-password" onClick={() => {/* Função para recuperar senha */}}>
-      Esqueceu a senha?
-    </Link>
-  </div>
+          <div className="form-group text-right">
+            <Link to="#" className="forgot-password" onClick={() => {/* Função para recuperar senha */}}>
+              Esqueceu a senha?
+            </Link>
+          </div>
 
-  <div className="form-group">
-    <button className="btn btn-primary btn-block" disabled={loading}>
-      {loading && <span className="spinner-border spinner-border-sm"></span>}
-      <span>Login</span>
-    </button>
-  </div>
+          <div className="form-group">
+            <button className="btn btn-primary btn-block" disabled={loading}>
+              {loading && <span className="spinner-border spinner-border-sm"></span>}
+              <span>Login</span>
+            </button>
+          </div>
 
-  {message && (
-    <div className="form-group">
-      <div className="alert alert-danger" role="alert">
-        {message}
-      </div>
-    </div>
-  )}
-  <CheckButton style={{ display: "none" }} ref={checkBtn} />
-</Form>
-        {/* Adiciona a mensagem de direcionamento para registro */}
+          {message && (
+            <div className="form-group">
+              <div className="alert alert-danger" role="alert">
+                {message}
+              </div>
+            </div>
+          )}
+          <CheckButton style={{ display: "none" }} ref={checkBtn} />
+        </Form>
+
         <div className="text-center mt-3">
           <p>
             Não possui uma conta? <Link to="/register">Clique aqui</Link>

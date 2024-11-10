@@ -1,5 +1,5 @@
 import axios from "axios";
-import Cookies from "js-cookie"; // Importando js-cookie
+import Cookies from "js-cookie"; 
 
 const API_URL = "http://localhost:3333/";
 
@@ -16,14 +16,12 @@ const login = (email, password) => {
     .post(
       API_URL + "signin",
       { email, password },
-      { withCredentials: true } // Garante o envio e recebimento de cookies
+      { withCredentials: true }
     )
     .then((response) => {
       if (response.data.message) {
-        // Armazena apenas a mensagem no localStorage
         localStorage.setItem("message", response.data.message);
       }
-      console.log( response.data.message);
       return response.data;
     })
     .catch((error) => {
@@ -33,7 +31,7 @@ const login = (email, password) => {
 };
 
 const logout = async () => {
-  localStorage.removeItem("message"); // Removendo a mensagem no logout
+  localStorage.removeItem("message");
   try {
     const response = await axios.post(API_URL + "signout", {}, { withCredentials: true });
     return response.data;
@@ -44,7 +42,6 @@ const logout = async () => {
 };
 
 const getCurrentUser = () => {
-  // Retorna o valor armazenado
   return localStorage.getItem("message");
 };
 

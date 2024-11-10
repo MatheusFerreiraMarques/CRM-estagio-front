@@ -1,31 +1,26 @@
+// student.service.js
 import axios from "axios";
 
 const API_URL = "http://localhost:3333/";
 
-// Função para adicionar aluno
-const addStudent = (name, email, registration, companyId, course, professionalId, cpf, position, phone, contractType, workDays, schedule, weeklyHours, totalHours, insurancePolicy) => {
+// Para registrar um aluno (ajuste conforme necessário)
+const registerStudent = (name, email, registration) => {
   return axios.post(API_URL + "register-student", {
     name,
     email,
-    registration,
-    companyId,
-    course,
-    professionalId,
-    cpf,
-    position,
-    phone,
-    contractType,
-    workDays,
-    schedule,
-    weeklyHours,
-    totalHours,
-    insurancePolicy
+    registration
+  }, {
+    withCredentials: true
   });
 };
 
-// Exportando a função
-const StudentService = {
-  addStudent,
+// Para adicionar um aluno ao sistema
+const addStudent = (nome, email, registration) => {
+  return axios.post(API_URL + "add-student", {
+    nome,
+    email,
+    registration
+  });
 };
 
-export default StudentService;
+export default { registerStudent, addStudent };

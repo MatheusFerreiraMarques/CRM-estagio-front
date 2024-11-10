@@ -17,12 +17,19 @@ const getModeratorBoard = () => {
 const getAdminBoard = () => {
   return axios.get(API_URL + "admin");
 };
-
+const registerStudent = (name, email, registration) => {
+  return axios.post(API_URL + "register-student", {
+    name,
+    email,
+    registration
+  });
+};
 const UserService = {
   getPublicContent,
   getUserBoard,
   getModeratorBoard,
   getAdminBoard,
+  registerStudent,
 }
 
 export default UserService;

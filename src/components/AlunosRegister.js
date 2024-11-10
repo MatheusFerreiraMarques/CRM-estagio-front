@@ -5,7 +5,7 @@ import CheckButton from "react-validation/build/button";
 import registerStudent from "../services/student.service";
 
 
-const RegisterStudent = (props) => {
+const AlunosRegister = (props) => {
   const form = useRef();
   const checkBtn = useRef();
   const [name, setName] = useState("");
@@ -122,4 +122,4 @@ const RegisterStudent = (props) => {
   );
 };
 
-export default RegisterStudent;
+export default AlunosRegister;

@@ -10,7 +10,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
 import Students from "./components/Students"; // Componente da Tabela de Alunos
-import RegisterStudent from "./components/RegisterStudent"
+import AlunosRegister from "./components/AlunosRegister";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(false);
@@ -75,7 +75,7 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route path="/students" element={<Students />} /> {/* Rota para Tabela */}
-          <Route path="/registerstudent" element={<RegisterStudent/>} /> {/* Rota para Tabela */}
+          <Route path="/alunosregister" element={<AlunosRegister/>} /> {/* Rota para Tabela */}
         </Routes>
       </div>
     </div>

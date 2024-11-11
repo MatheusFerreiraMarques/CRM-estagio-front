@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchStudents } from "../services/fetch.students"; // Função de busca de alunos
 import '../styles/Students.css';
-import Login from './Login';
 
 const Students = () => {
   const navigate = useNavigate();
@@ -19,9 +18,7 @@ const Students = () => {
         const students = response.data.students;
         setClientesFiltrados(students); // Atualiza o estado com os estudantes diretamente da API
       } catch (error) {
-        console.log(error)
-
-        Login()
+        console.error("Erro ao carregar os estudantes:", error);
 
         
       }

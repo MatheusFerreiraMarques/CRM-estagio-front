@@ -44,7 +44,7 @@
 /* Efeito de hover mais destacado */
 .table tbody tr:hover {
   background-color: #ffffff; /* Cor de fundo mais clara ao passar o mouse */
-  transform: scale(1.0015);
+  transform: scale(1.0025);
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 

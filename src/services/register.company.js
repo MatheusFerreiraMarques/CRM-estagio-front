@@ -11,7 +11,7 @@ const registerCompany = (corporateName, tradeName, address, neighborhood, postal
     postalCode,
     cnpj,
     segment,
-    representative
+    representative,
   },{
     withCredentials: true
   });

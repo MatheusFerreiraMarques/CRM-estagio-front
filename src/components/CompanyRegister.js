@@ -32,7 +32,7 @@ const CompanyRegister = () => {
           tradeName,
           address,
           neighborhood,
-          postalCode: parseInt(postalCode, 10), // Certificando que o postalCode é numérico
+          postalCode,
           cnpj,
           segment,
           representative,

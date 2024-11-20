@@ -5,7 +5,7 @@ const API_URL = "http://localhost:3333/";
 export const fetchCompanies = async (page) => {
   try {
     const result = await axios.post(
-      API_URL + "view-companies",
+      API_URL + "view-company",
       { page },
       { withCredentials: true }
     );

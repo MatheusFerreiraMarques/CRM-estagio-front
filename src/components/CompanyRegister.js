@@ -2,66 +2,60 @@ import React, { useState, useRef } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import registerStudent from "../services/student.service";
+import registerCompany from "../services/register.company";
 
-
-const StudentRegister = (props) => {
+const CompanyRegister = () => {
   const form = useRef();
   const checkBtn = useRef();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [registration, setRegistration] = useState("");
+  const [corporateName, setCorporateName] = useState("");
+  const [tradeName, setTradeName] = useState("");
+  const [address, setAddress] = useState("");
+  const [neighborhood, setNeighborhood] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [cnpj, setCnpj] = useState("");
+  const [segment, setSegment] = useState("");
+  const [representative, setRepresentative] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
-  const onChangeName = (e) => {
-    const name = e.target.value;
-    setName(name);
-  };
-  
-  const onChangeEmail = (e) => {
-    const email = e.target.value;
-    setEmail(email);
-  };
-
-  const onChangeRegistration = (e) => {
-    const registration = e.target.value;
-    setRegistration(registration);
-  };
-
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-
     setMessage("");
     setSuccessful(false);
 
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-        registerStudent(name, email, registration).then(
-        (response) => {
-          setMessage(response.data.message);
-          setSuccessful(true);
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-          setMessage(resMessage);
-          setSuccessful(false);
-        }
-      );
+      try {
+        const response = await registerCompany({
+          corporateName,
+          tradeName,
+          address,
+          neighborhood,
+          postalCode: parseInt(postalCode, 10), // Certificando que o postalCode é numérico
+          cnpj,
+          segment,
+          representative,
+        });
+        setMessage("Empresa registrada com sucesso!");
+        setSuccessful(true);
+      } catch (error) {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        setMessage(resMessage);
+        setSuccessful(false);
+      }
     }
   };
 
   return (
     <div className="col-md-12">
       <div className="card card-container">
-        <h2 className="section-title">Registro Alunos</h2>
+        <h2 className="section-title">Registro Empresas</h2>
         <Form onSubmit={handleRegister} ref={form}>
           {!successful && (
             <div>
@@ -69,10 +63,10 @@ const StudentRegister = (props) => {
                 <Input
                   type="text"
                   className="form-control"
-                  placeholder="Nome"
-                  name="name"
-                  value={name}
-                  onChange={onChangeName}
+                  placeholder="Nome Corporativo"
+                  value={corporateName}
+                  onChange={(e) => setCorporateName(e.target.value)}
+                  required
                 />
               </div>
 
@@ -80,21 +74,76 @@ const StudentRegister = (props) => {
                 <Input
                   type="text"
                   className="form-control"
-                  placeholder="E-mail"
-                  name="email"
-                  value={email}
-                  onChange={onChangeEmail}
+                  placeholder="Nome Fantasia"
+                  value={tradeName}
+                  onChange={(e) => setTradeName(e.target.value)}
+                  required
                 />
               </div>
 
               <div className="form-group">
                 <Input
-                  type="registration"
+                  type="text"
                   className="form-control"
-                  placeholder="Registration"
-                  name="registration"
-                  value={registration}
-                  onChange={onChangeRegistration}
+                  placeholder="Endereço"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <Input
+                  type="text"
+                  className="form-control"
+                  placeholder="Bairro"
+                  value={neighborhood}
+                  onChange={(e) => setNeighborhood(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <Input
+                  type="text"
+                  className="form-control"
+                  placeholder="CEP"
+                  value={postalCode}
+                  onChange={(e) => setPostalCode(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <Input
+                  type="text"
+                  className="form-control"
+                  placeholder="CNPJ"
+                  value={cnpj}
+                  onChange={(e) => setCnpj(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <Input
+                  type="text"
+                  className="form-control"
+                  placeholder="Segmento"
+                  value={segment}
+                  onChange={(e) => setSegment(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <Input
+                  type="text"
+                  className="form-control"
+                  placeholder="Representante"
+                  value={representative}
+                  onChange={(e) => setRepresentative(e.target.value)}
+                  required
                 />
               </div>
 
@@ -116,10 +165,9 @@ const StudentRegister = (props) => {
           )}
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
-
       </div>
     </div>
   );
 };
 
-export default StudentRegister;
+export default CompanyRegister;

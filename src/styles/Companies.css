@@ -1,0 +1,189 @@
+
+.table th, .table td {
+  border: 1px solid #dee2e6; /* Adiciona bordas entre as colunas */
+}
+
+/* Estilização geral da tabela */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+
+/* Estilo do cabeçalho da tabela */
+.table thead th {
+  background-color: #343a40; /* Cor de fundo mais escura */
+  color: #ffffff; /* Cor do texto em branco */
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Estilo das células da tabela */
+.table tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* Cores alternadas mais claras para as linhas da tabela */
+.table tbody tr:nth-child(odd) {
+  background-color: #f9f9f9; /* Cinza claro para as linhas ímpares */
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f8f8f8; /* Branco para as linhas pares */
+}
+
+/* Efeito de hover mais destacado */
+.table tbody tr:hover {
+  background-color: #ffffff; /* Cor de fundo mais clara ao passar o mouse */
+  transform: scale(1.0025);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Cor para o status "Nenhum" e "Trabalhando" */
+.text-danger {
+  color: #d9534f; /* Vermelho suave */
+}
+.text-success {
+  color: #5cb85c; /* Verde suave */
+}
+
+/* Botões na tabela */
+.btn-outline-primary {
+  color: #007bff;
+  border: 1px solid #007bff;
+}
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-outline-secondary {
+  color: #6c757d;
+  border: 1px solid #6c757d;
+}
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+/* Estilos do Modal */
+.modal-dialog {
+  max-width: 600px; /* Tamanho máximo do modal */
+  margin: 1.75rem auto; /* Centraliza o modal */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.modal-content {
+  border-radius: 10px; /* Bordas arredondadas do conteúdo do modal */
+  background-color: #fff; /* Cor de fundo branca */
+  border: none; /* Remove borda padrão */
+  overflow: hidden; /* Previne que o conteúdo ultrapasse as bordas arredondadas */
+}
+
+.modal-header {
+  background-color: #535353; /* Cor de fundo do cabeçalho */
+  color: #fff; /* Texto branco */
+  font-size: 1.25rem; /* Tamanho da fonte */
+  border-bottom: none; /* Remove a borda inferior */
+  border-top-left-radius: 10px; /* Bordas arredondadas */
+  border-top-right-radius: 10px; /* Bordas arredondadas */
+  height: 60px;
+}
+
+.modal-title {
+  font-weight: bold; /* Deixa o título em negrito */
+}
+
+.modal-footer {
+  border-top: none; /* Remove a borda superior */
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-body-scroll {
+  max-height: 400px; /* Limita a altura da área de conteúdo */
+  overflow-y: auto; /* Habilita rolagem vertical */
+}
+
+.d-flex {
+  align-items: center; /* Garante que a barra de pesquisa e o ícone estejam alinhados verticalmente */
+}
+
+.plus-icon {
+  display: flex; /* Torna o botão um flex container */
+  justify-content: center; /* Alinha o ícone horizontalmente no centro */
+  align-items: center; /* Alinha o ícone verticalmente no centro */
+  width: 40px;
+  height: 40px;
+  background-color: #28a745;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  position: relative;
+  top: -5px; /* Ajuste para mover o botão um pouco para cima */
+}
+
+.plus-icon:hover {
+  background-color: #218838; /* Cor mais escura ao passar o mouse */
+  transform: scale(1.1);
+}
+
+.refresh-icon {
+  display: flex; /* Torna o botão um flex container */
+  justify-content: center; /* Alinha o ícone horizontalmente no centro */
+  align-items: center; /* Alinha o ícone verticalmente no centro */
+  width: 40px;
+  height: 40px;
+  background-color: #28a745;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  position: relative;
+  top: -5px; /* Ajuste para mover o botão um pouco para cima */
+}
+
+.refresh-icon:hover {
+  background-color: #218838; /* Cor mais escura ao passar o mouse */
+  transform: scale(1.1);
+}
+
+input.form-control {
+  width: 100%; /* Garante que o campo de pesquisa ocupe a maior parte da largura disponível */
+}
+.search-container {
+  position: relative; /* Necessário para o posicionamento do ícone */
+  display: flex; /* Para alinhar a barra de pesquisa e o ícone horizontalmente */
+  align-items: center; /* Centraliza o ícone verticalmente com a barra de pesquisa */
+  width: 100%; /* A largura da barra de pesquisa vai se ajustar conforme o tamanho do ícone */
+}
+
+.form-control {
+  width: 100%; /* A largura da barra de pesquisa irá preencher o contêiner, até o tamanho do ícone */
+  padding-right: 40px; /* Espaço para o ícone à direita */
+}
+
+
+

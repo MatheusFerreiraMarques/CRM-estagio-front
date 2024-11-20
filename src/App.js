@@ -11,6 +11,8 @@ import Register from "./components/Register";
 import Home from "./components/Home";
 import Students from "./components/Students"; // Componente da Tabela de Alunos
 import StudentRegister from "./components/StudentRegister";
+import Companies from "./components/Companies"; // Componente da Tabela de Alunos
+import CompanyRegister from "./components/CompanyRegister";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(false);
@@ -37,15 +39,23 @@ const App = () => {
         </Link>
 
         <div className="navbar-nav mr-auto">
-          {/* Exibe o item "Alunos" apenas se "message" estiver presente no localStorage */}
-          {currentUser && (
-            <li className="nav-item">
-              <Link to={"/students"} className="nav-link">
-                Students
-              </Link>
-            </li>
-          )}
-        </div>
+  {/* Exibe o item "Alunos" apenas se "message" estiver presente no localStorage */}
+  {currentUser && (
+    <>
+      <li className="nav-item">
+        <Link to={"/students"} className="nav-link">
+          Students
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link to={"/companies"} className="nav-link">
+          Companies
+        </Link>
+      </li>
+    </>
+  )}
+</div>
+
 
         
 
@@ -76,6 +86,8 @@ const App = () => {
           <Route exact path="/register" element={<Register />} />
           <Route path="/students" element={<Students />} /> {/* Rota para Tabela */}
           <Route path="/studentregister" element={<StudentRegister/>} /> {/* Rota para Tabela */}
+          <Route path="/companies" element={<Companies/>} /> {/* Rota para Tabela */}
+          <Route path="/companyregister" element={<CompanyRegister/>} /> {/* Rota para Tabela */}
         </Routes>
       </div>
     </div>

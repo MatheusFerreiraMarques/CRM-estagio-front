@@ -26,13 +26,22 @@ const CompanyRegister = () => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
+      const numericPostalCode = Number(postalCode);
+
+      // Verifica se o postalCode é um número válido e tem 8 dígitos
+      if (isNaN(numericPostalCode) || numericPostalCode.toString().length !== 8) {
+        setMessage("CEP deve ser um número válido com exatamente 8 dígitos.");
+        setSuccessful(false);
+        return;
+      }
+
       try {
         const response = await registerCompany({
           corporateName,
           tradeName,
           address,
           neighborhood,
-          postalCode,
+          postalCode: numericPostalCode, // Envia como número
           cnpj,
           segment,
           representative,

@@ -15,7 +15,7 @@ const Companies = () => {
         const response = await fetchCompanies(1); // Passando a página 1 como exemplo
         console.log("Resposta da API:", response.data);
 
-        const companies = response.data.companies || [];
+        const companies = response.data.companys || [];
         setClientesFiltrados(companies); // Atualiza o estado com as empresas diretamente da API
       } catch (error) {
         console.error("Erro ao carregar as empresas:", error);
@@ -44,6 +44,11 @@ const Companies = () => {
     }
   };
 
+  const handleEditCompany = (corporateName) => {
+    // Exemplo de redirecionamento para uma página de edição com o nome corporativo
+    navigate(`/edit-company/${corporateName}`);
+  };
+
   return (
     <div className="container">
       <div className="d-flex justify-content-between">
@@ -67,15 +72,10 @@ const Companies = () => {
       <table className="table table-bordered table-striped table-hover">
         <thead>
           <tr>
-            <th>#</th>
             <th>Nome Corporativo</th>
             <th>Nome Fantasia</th>
-            <th>Endereço</th>
-            <th>Bairro</th>
-            <th>CEP</th>
             <th>CNPJ</th>
             <th>Segmento</th>
-            <th>Representante</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -86,14 +86,18 @@ const Companies = () => {
               <tr key={company.corporateName}>
                 <td>{company.corporateName}</td>
                 <td>{company.tradeName}</td>
-                <td>{company.address}</td>
-                <td>{company.Neighborhood}</td>
-                <td>{company.postalCode}</td>
                 <td>{company.cnpj}</td>
                 <td>{company.segment}</td>
-                <td>{company.representative}</td>
                 <td>
-                  {/* Adicionar botões de ação, se necessário */}
+                  <div className="edit-container">
+                    <div
+                      className="edit-icon-box"
+                      onClick={() => handleEditCompany(company.corporateName)}
+                      title="Editar"
+                    >
+                      <i className="fas fa-edit"></i>
+                    </div>
+                  </div>
                 </td>
               </tr>
             ))

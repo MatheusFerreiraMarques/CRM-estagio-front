@@ -185,5 +185,34 @@ input.form-control {
   padding-right: 40px; /* Espaço para o ícone à direita */
 }
 
+/* Contêiner para centralizar */
+.edit-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+/* Caixa amarela ao redor do ícone */
+.edit-icon-box {
+  background-color: #ffc107; /* Amarelo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px; /* Tamanho do quadrado */
+  height: 25px;
+  border-radius: 5px; /* Bordas arredondadas */
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Suaviza hover */
+}
 
+/* Ícone branco */
+.edit-icon-box i {
+  color: #ffffff; /* Branco */
+  font-size: 1rem; /* Tamanho do ícone */
+}
+
+/* Hover com escala */
+.edit-icon-box:hover {
+  transform: scale(1.2); /* Aumenta no hover */
+  background-color: #e0a800; /* Amarelo mais escuro no hover */
+}

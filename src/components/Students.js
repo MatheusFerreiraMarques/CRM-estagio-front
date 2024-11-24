@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { fetchStudents } from "../services/fetch.students"; // Função de busca de alunos
-import '../styles/Students.css';
+import "../styles/Students.css";
 
 const Students = () => {
   const navigate = useNavigate();
@@ -19,8 +19,6 @@ const Students = () => {
         setClientesFiltrados(students); // Atualiza o estado com os estudantes diretamente da API
       } catch (error) {
         console.error("Erro ao carregar os estudantes:", error);
-
-        
       }
     };
 
@@ -31,8 +29,12 @@ const Students = () => {
     setPesquisaNome(event.target.value);
   };
 
+  const handleEditStudent = (registration) => {
+    // Exemplo de redirecionamento para uma página de edição com o ID do aluno
+    navigate(`/edit-student/${registration}`);
+  };
+
   const handleAddStudent = () => {
-    // Redireciona para a página de cadastro de aluno
     navigate("/studentregister");
   };
 
@@ -62,7 +64,7 @@ const Students = () => {
             <i className="fas fa-plus"></i>
           </div>
           <div className="refresh-icon" onClick={handleRefresh} style={{ marginRight: "10px" }}>
-            <i className="fas fa-sync-alt"></i> {/* Ícone de refresh */}
+            <i className="fas fa-sync-alt"></i>
           </div>
         </div>
       </div>
@@ -70,28 +72,36 @@ const Students = () => {
       <table className="table table-bordered table-striped table-hover">
         <thead>
           <tr>
-            <th>#</th>
             <th>Nome</th>
-            <th>Email</th>
             <th>Registro</th>
+            <th>Email</th>
+            <th>Empresa</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
           {clientesFiltrados
-            .filter(aluno => aluno.name && aluno.name.toLowerCase().includes(pesquisaNome.toLowerCase()))
-            .map(aluno => (
+            .filter((aluno) => aluno.name && aluno.name.toLowerCase().includes(pesquisaNome.toLowerCase()))
+            .map((aluno) => (
               <tr key={aluno.registration}>
-                <td>{aluno.registration}</td>
                 <td>{aluno.name}</td>
-                <td>{aluno.email}</td>
                 <td>{aluno.registration}</td>
+                <td>{aluno.email}</td>
+                <td>{aluno.companyId || "Não informado"}</td>
                 <td>
-                  {/* Botão de ação se necessário */}
-                </td>
+  <div className="edit-container">
+    <div
+      className="edit-icon-box"
+      onClick={() => handleEditStudent(aluno.registration)}
+      title="Editar"
+    >
+      <i className="fas fa-edit"></i>
+    </div>
+  </div>
+</td>
+
               </tr>
-            ))
-          }
+            ))}
         </tbody>
       </table>
     </div>

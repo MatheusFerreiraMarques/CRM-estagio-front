@@ -13,6 +13,8 @@ import Students from "./components/Students"; // Componente da Tabela de Alunos
 import StudentRegister from "./components/StudentRegister";
 import Companies from "./components/Companies"; // Componente da Tabela de Alunos
 import CompanyRegister from "./components/CompanyRegister";
+import EditStudent from "./components/EditStudent";
+import EditCompany from "./components/EditCompany";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(false);
@@ -85,8 +87,10 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route path="/students" element={<Students />} /> {/* Rota para Tabela */}
+          <Route path="/editstudent/:registration" element={<EditStudent />} />
           <Route path="/studentregister" element={<StudentRegister/>} /> {/* Rota para Tabela */}
           <Route path="/companies" element={<Companies/>} /> {/* Rota para Tabela */}
+          <Route path="/editcompany/:cnpj" element={<Companies/>} /> {/* Rota para Tabela */}
           <Route path="/companyregister" element={<CompanyRegister/>} /> {/* Rota para Tabela */}
         </Routes>
       </div>

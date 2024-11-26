@@ -29,10 +29,10 @@ const Students = () => {
     setPesquisaNome(event.target.value);
   };
 
-  const handleEditStudent = (registration) => {
-    // Exemplo de redirecionamento para uma página de edição com o ID do aluno
-    navigate(`/edit-student/${registration}`);
+  const handleEditStudent = (student) => {
+    navigate(`/editstudent/${student.registration}`, { state: student });
   };
+  
 
   const handleAddStudent = () => {
     navigate("/studentregister");
@@ -90,13 +90,14 @@ const Students = () => {
                 <td>{aluno.companyId || "Não informado"}</td>
                 <td>
   <div className="edit-container">
-    <div
-      className="edit-icon-box"
-      onClick={() => handleEditStudent(aluno.registration)}
-      title="Editar"
-    >
-      <i className="fas fa-edit"></i>
-    </div>
+  <div
+  className="edit-icon-box"
+  onClick={() => handleEditStudent(aluno)}
+  title="Editar"
+>
+  <i className="fas fa-edit"></i>
+</div>
+
   </div>
 </td>
 

@@ -44,9 +44,9 @@ const Companies = () => {
     }
   };
 
-  const handleEditCompany = (corporateName) => {
+  const handleEditCompany = (cnpj) => {
     // Exemplo de redirecionamento para uma página de edição com o nome corporativo
-    navigate(`/edit-company/${corporateName}`);
+    navigate(`/editcompany/${cnpj}`);
   };
 
   return (
@@ -92,7 +92,7 @@ const Companies = () => {
                   <div className="edit-container">
                     <div
                       className="edit-icon-box"
-                      onClick={() => handleEditCompany(company.corporateName)}
+                      onClick={() => handleEditCompany(company.cnpj)}
                       title="Editar"
                     >
                       <i className="fas fa-edit"></i>
